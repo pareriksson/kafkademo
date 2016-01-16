@@ -1,4 +1,4 @@
-package se.r2m.bigint.casinofront.game;
+package se.ffcg.kafkademo.kafkaproxy.game;
 
 public class GameInput {
 

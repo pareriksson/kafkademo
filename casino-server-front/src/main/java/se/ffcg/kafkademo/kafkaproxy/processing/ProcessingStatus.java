@@ -1,4 +1,4 @@
-package se.r2m.bigint.casinofront.processing;
+package se.ffcg.kafkademo.kafkaproxy.processing;
 
 public class ProcessingStatus {
 

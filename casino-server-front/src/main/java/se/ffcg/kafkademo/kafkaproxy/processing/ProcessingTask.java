@@ -1,4 +1,4 @@
-package se.r2m.bigint.casinofront.processing;
+package se.ffcg.kafkademo.kafkaproxy.processing;
 
 import java.util.TimerTask;
 
@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.async.DeferredResult;
 
-import se.r2m.bigint.casinofront.game.GameEngine;
-import se.r2m.bigint.casinofront.game.GameInput;
-import se.r2m.bigint.casinofront.game.GameOutput;
-import se.r2m.bigint.casinofront.model.GameResult;
+import se.ffcg.kafkademo.kafkaproxy.game.GameEngine;
+import se.ffcg.kafkademo.kafkaproxy.game.GameOutput;
+import se.ffcg.kafkademo.kafkaproxy.game.GameInput;
+import se.ffcg.kafkademo.kafkaproxy.model.GameResult;
 
 public class ProcessingTask extends TimerTask {
 

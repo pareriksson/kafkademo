@@ -1,16 +1,14 @@
-package se.r2m.bigint.casinofront.model;
+package se.ffcg.kafkademo.kafkaproxy.game;
 
-public class GameResult {
+public class GameOutput {
 
-    private final String gameId;
     private final int resultNumber;
     private final int gameWinnings;
     private final int jackpotWinnings;
     private final int remainingBalance;
 
-    public GameResult(String gameId, int resultNumber, int gameWinnings, int jackpotWinnings, int remainingBalance) {
+    public GameOutput(int resultNumber, int gameWinnings, int jackpotWinnings, int remainingBalance) {
         super();
-        this.gameId = gameId;
         this.resultNumber = resultNumber;
         this.gameWinnings = gameWinnings;
         this.jackpotWinnings = jackpotWinnings;
@@ -31,10 +29,6 @@ public class GameResult {
 
     public int getRemainingBalance() {
         return remainingBalance;
-    }
-
-    public String getGameId() {
-        return gameId;
     }
 
 }
