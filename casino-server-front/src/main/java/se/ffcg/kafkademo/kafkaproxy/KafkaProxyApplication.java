@@ -22,9 +22,9 @@ import java.util.concurrent.Executors;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class CasinoFrontApplication {
+public class KafkaProxyApplication {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CasinoFrontApplication.class);
+  private static final Logger LOG = LoggerFactory.getLogger(KafkaProxyApplication.class);
 
   @Value("${kafka.game.topic}")
   private String topic;
@@ -32,13 +32,13 @@ public class CasinoFrontApplication {
   @Value("${kafka.bootstrap.servers}")
   private String servers;
 
-  public CasinoFrontApplication() {
-    LOG.info("Starting CasinoFrontApplication...");
+  public KafkaProxyApplication() {
+    LOG.info("Starting KafkaProxyApplication...");
 
   }
 
   public static void main(String[] args) {
-    ApplicationContext ctx = SpringApplication.run(CasinoFrontApplication.class, args);
+    ApplicationContext ctx = SpringApplication.run(KafkaProxyApplication.class, args);
 
     // System.out.println("Let's inspect the beans provided by Spring Boot:");
     //
