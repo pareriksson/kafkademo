@@ -2,18 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
 <div class="main">
-    hej
+    <h3 class="center">Utvecklarpub undersökning</h3>
+    Skriv in dina värden i fälten och tryck på Skicka!
+
     <form method="get" action="/publish?param1=foo&param2=foo">
-        p1: <input name="param1" type="text"></input><br/>
-        p2: <input name="param2" type="text"></input><br/>
-        <button type="submit" value="skicka">Skicka</button>
+
+        <br/>
+
+        <span class="desc">Hur gammal är du?</span>
+        <br/>
+        <input name="param1" type="number"
+               onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input><br/>
+
+
+        <span class="desc">Hur mycket väger du?</span>
+        <br/>
+        <input name="param2" type="number"
+               onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input><br/>
+
+        <div style="text-align: center; margin-top: 1em">
+
+            <button type="submit" value="Skicka">Skicka</button>
+
+        </div>
     </form>
 
 </div>
