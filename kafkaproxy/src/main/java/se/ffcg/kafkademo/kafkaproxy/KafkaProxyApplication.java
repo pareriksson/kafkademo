@@ -50,20 +50,20 @@ public class KafkaProxyApplication {
     // }
   }
 
-  @Bean
-  public Poller poller() {
-    Properties conf = new Properties();
-    conf.put("bootstrap.servers", servers);
-    conf.put("group.id", "group01");
-    conf.put("key.deserializer", StringDeserializer.class);
-    conf.put("value.deserializer", StringDeserializer.class);
-    Poller poller = new Poller(conf, Collections.singletonList(topic));
-
-    ExecutorService es = Executors.newFixedThreadPool(2);
-    es.execute(poller);
-
-    return poller;
-  }
+//  @Bean
+//  public Poller poller() {
+//    Properties conf = new Properties();
+//    conf.put("bootstrap.servers", servers);
+//    conf.put("group.id", "group01");
+//    conf.put("key.deserializer", StringDeserializer.class);
+//    conf.put("value.deserializer", StringDeserializer.class);
+//    Poller poller = new Poller(conf, Collections.singletonList(topic));
+//
+//    ExecutorService es = Executors.newFixedThreadPool(2);
+//    es.execute(poller);
+//
+//    return poller;
+//  }
 
   @Bean
   public GameEngine getGameEngine() {
