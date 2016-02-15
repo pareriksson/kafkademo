@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import se.ffcg.kafkademo.kafkaproxy.game.GameEngine;
 import se.ffcg.kafkademo.kafkaproxy.game.GameOutput;
-import se.ffcg.kafkademo.kafkaproxy.model.GameResult;
+import se.ffcg.kafkademo.kafkaproxy.model.PollEvent;
 import se.ffcg.kafkademo.kafkaproxy.processing.ProcessingTask;
 import se.ffcg.kafkademo.kafkaproxy.game.GameInput;
 
@@ -48,12 +48,12 @@ public class FrontController {
   ) {
     log.info("p1: {}, p2 {}", param1, param2);
 
-    playGameBlocking("client1", 11, 20);
+    playGameBlocking("client1", Integer.parseInt(param1), Integer.parseInt(param2));
     return "Tack för din medverkan";
   }
 
   @RequestMapping("/playgameBlocking")
-  public GameResult playGameBlocking(
+  public PollEvent playGameBlocking(
       @RequestParam(required = true, value = "clientId") String clientId,
       @RequestParam(required = true, value = "playedNumber") Integer playedNumber,
       @RequestParam(required = true, value = "playedAmount") Integer playedAmount
@@ -62,6 +62,8 @@ public class FrontController {
 
     Assert.isTrue(playedNumber >= 0 && playedNumber <= 36);
     GameInput gameInput = new GameInput(clientId, playedNumber, playedAmount);
+    PollEvent pollEvent = new PollEvent("ID: "+counter.incrementAndGet()
+    , playedNumber, playedAmount);
     String gameId = String.format("%s-%d", GAME_ID_PREFIX, counter.incrementAndGet());
 
     // try {
@@ -70,15 +72,13 @@ public class FrontController {
     // e.printStackTrace();
     // }
 
-    GameOutput go = engine.doPlay(gameInput);
+    GameOutput go = engine.doPlay(pollEvent);
 
-    return new GameResult(gameId, go.getResultNumber(), go.getGameWinnings(),
-        go.getJackpotWinnings(),
-        go.getRemainingBalance());
+    return null;
   }
 
   @RequestMapping("/playgame")
-  public DeferredResult<GameResult> playGame(
+  public DeferredResult<PollEvent> playGame(
       @RequestParam(required = true, value = "clientId") String clientId,
       @RequestParam(required = true, value = "playedNumber") Integer playedNumber,
       @RequestParam(required = true, value = "playedAmount") Integer playedAmount
@@ -88,7 +88,7 @@ public class FrontController {
     GameInput gameInput = new GameInput(clientId, playedNumber, playedAmount);
     String gameId = String.format("%s-%d", GAME_ID_PREFIX, counter.incrementAndGet());
 
-    DeferredResult<GameResult> deferredResult = new DeferredResult<GameResult>();
+    DeferredResult<PollEvent> deferredResult = new DeferredResult<PollEvent>();
     ProcessingTask task = new ProcessingTask(deferredResult, engine, gameInput, gameId);
     timer.schedule(task, PROCESSING_TIME);
 

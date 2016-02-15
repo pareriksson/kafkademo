@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import se.ffcg.kafkademo.kafkaproxy.model.PollEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,16 +67,12 @@ public class KafkaGameEngine implements GameEngine, InitializingBean {
     return conf;
   }
 
-  public GameOutput doPlay(GameInput input) {
+  public GameOutput doPlay(PollEvent input) {
 
     for (int i = 0; i < multiplyFactor; i++) {
 
 
-      int amount = input.getPlayedAmount() + (int) (Math.random() * 10.0);
-
-      GameInput gi = new GameInput(input.getPlayerId(), input.getPlayedNumber(), amount);
-      ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic,
-          getInputString(gi));
+      ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, input.toString());
       //    log.info("Sending to kafka {}", record);
 
 

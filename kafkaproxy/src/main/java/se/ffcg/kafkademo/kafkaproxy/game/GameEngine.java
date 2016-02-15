@@ -1,7 +1,9 @@
 package se.ffcg.kafkademo.kafkaproxy.game;
 
+import se.ffcg.kafkademo.kafkaproxy.model.PollEvent;
+
 public interface GameEngine {
 
-    GameOutput doPlay(GameInput input);
+    GameOutput doPlay(PollEvent input);
 
 }
